@@ -5,11 +5,17 @@ export const initialState = {
   bombMinTime: 20,
   bombMaxTime: 90,
   rounds: 5,
+  gameModes: [],
   isLoading: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case 'LOAD_DATA':
+      return {
+        ...state,
+        gameModes: action.value,
+      };
     case 'SET_GAME_STATE':
       return {
         ...state,

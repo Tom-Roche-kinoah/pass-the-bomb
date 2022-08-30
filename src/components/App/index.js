@@ -1,9 +1,11 @@
 // modules
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 // actions
 // import { setGameState } from 'src/actions/game';
+import gameModes from 'src/data/gameModes';
 
 // components
 import State from 'src/components/State';
@@ -16,16 +18,20 @@ import bombLogo from './bomb_icon.svg';
 import './styles.css';
 
 function App() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const gameState = useSelector((state) => (state.game.state));
-  // const stepsStyle = {
-  //   left: `${-(gameState * 100) + 100}vw`,
-  // };
   const gameStateMotion = {
     initial: { x: 100, opacity: 1, scale: 1 },
     animate: { x: 0, opacity: 1, scale: 1 },
     transition: { type: 'tween' },
   };
+
+  useEffect(() => {
+    dispatch({
+      type: 'LOAD_DATA',
+      value: gameModes,
+    });
+  }, []);
 
   return (
     <div className="app">
