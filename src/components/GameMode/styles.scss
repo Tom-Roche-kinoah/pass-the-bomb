@@ -1,0 +1,19 @@
+.player-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  .player-name {
+    padding: .2rem;
+    padding-left: .5rem;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    .player-name-text {
+      
+    }
+    button {
+    }
+  }
+}

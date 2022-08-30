@@ -1,0 +1,17 @@
+.game-mode-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  .game-mode {
+      text-align: left;
+      padding: 1rem;
+      border-bottom: solid 2px black;
+      .game-mode-name {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+      .game-mode-description {
+        font-size: .8rem;
+      }
+  }
+}

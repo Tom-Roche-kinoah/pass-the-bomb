@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 // actions
-// import { setGameState } from 'src/actions/game';
+import { loadData } from 'src/actions/game';
 import gameModes from 'src/data/gameModes';
 
 // components
@@ -12,6 +12,7 @@ import State from 'src/components/State';
 import StateNavigation from 'src/components/StateNavigation';
 import PlayerList from 'src/components/PlayerList';
 import AddPlayer from 'src/components/AddPlayer';
+import GameModes from 'src/components/GameModes';
 
 // design
 import bombLogo from './bomb_icon.svg';
@@ -26,11 +27,9 @@ function App() {
     transition: { type: 'tween' },
   };
 
+  // on component load
   useEffect(() => {
-    dispatch({
-      type: 'LOAD_DATA',
-      value: gameModes,
-    });
+    dispatch(loadData(gameModes));
   }, []);
 
   return (
@@ -61,6 +60,7 @@ function App() {
           transition={gameStateMotion.transition}
         >
           <h1 className="game-title">Mode de jeu</h1>
+          <GameModes />
         </motion.div>
       )}
 
