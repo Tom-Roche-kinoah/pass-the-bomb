@@ -1,34 +1,37 @@
 // modules
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 
 // actions
 import { removePlayer } from 'src/actions/game';
 
-// design
-import './styles.scss';
-
 function Player({ playerName }) {
   const playerList = useSelector((state) => (state.game.players));
   const dispatch = useDispatch();
+
   const handleRemovePlayer = (playerToRemove) => {
     const newPlayerList = playerList.filter((player) => player !== playerToRemove);
-    console.table(newPlayerList);
     dispatch(removePlayer(newPlayerList));
   };
 
   return (
-    <li
+    <motion.li
       className="player-name"
+      initial={{ opacity: 0, x: 5 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ type: 'spring' }}
     >
-      {playerName}
+      <span className="player-name-text">
+        {playerName}
+      </span>
       <button
         type="button"
         onClick={() => handleRemovePlayer(playerName)}
       >
         x
       </button>
-    </li>
+    </motion.li>
   );
 }
 

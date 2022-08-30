@@ -8,10 +8,16 @@ import './styles.scss';
 
 function AddPLayer() {
   const dispatch = useDispatch();
+  const playerList = useSelector((state) => (state.game.players));
   const playerNameInput = useSelector((state) => (state.game.playerNameInput));
 
   const handleAddPlayer = (e) => {
     e.preventDefault();
+    // if player is already in list -> stop
+    if (playerList.find((player) => player.toLowerCase() === playerNameInput.toLowerCase())) {
+      return;
+    }
+    // if valid input -> dispatch
     if (playerNameInput.trim()) {
       dispatch(addPlayer());
       document.getElementById('playerNameInput').focus();
@@ -22,6 +28,7 @@ function AddPLayer() {
     <form
       className="add-player"
       onSubmit={(e) => handleAddPlayer(e)}
+      method="post"
     >
       <p>Ajouter des joueurs :</p>
       <input
