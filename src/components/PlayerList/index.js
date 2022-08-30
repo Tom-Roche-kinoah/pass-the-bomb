@@ -1,23 +1,22 @@
-import { useSelector, useDispatch } from 'react-redux';
+// modules
+import { useSelector } from 'react-redux';
 
-// actions
-import { changeField } from 'src/actions/game';
+// components
+import Player from 'src/components/Player';
 
 // design
 import './styles.scss';
 
 function PlayerList() {
-  const dispatch = useDispatch();
   const playerList = useSelector((state) => (state.game.players));
 
   return (
     <ul className="player-list">
       { playerList.map((player) => (
-        <li
+        <Player
           key={player}
-        >
-          {player}
-        </li>
+          playerName={player}
+        />
       ))}
     </ul>
   );

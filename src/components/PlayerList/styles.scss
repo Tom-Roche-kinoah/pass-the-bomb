@@ -1,3 +1,12 @@
 .player-list {
-
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  .player-name {
+    padding: .2rem .5rem;
+    background-color: white;
+    button {
+      margin-left: .5rem;
+    }
+  }
 }

@@ -1,6 +1,6 @@
 export const initialState = {
   state: 1,
-  players: [],
+  players: ['Tommy', 'Louise', 'Camille'],
   playerNameInput: '',
   bombMinTime: 20,
   bombMaxTime: 90,
@@ -25,6 +25,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         players: [...state.players, state.playerNameInput],
         playerNameInput: '',
+      };
+    case 'REMOVE_PLAYER':
+      return {
+        ...state,
+        players: action.newPlayerList,
       };
     default:
       return state;
