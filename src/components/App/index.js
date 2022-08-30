@@ -27,6 +27,20 @@ function App() {
     transition: { type: 'tween' },
   };
 
+  const playerList = useSelector((state) => (state.game.players));
+  // random from array
+  const randFromArray = (array) => {
+    const arrayLength = array.length;
+    const randomIndex = Math.floor(Math.random() * arrayLength);
+    return array[randomIndex];
+  };
+
+  // function randomFirstAnim() {
+  //   setTimeout(() => {
+  //     alert(randFromArray(playerList));
+  //   }, 1000);
+  // }
+
   // on component load
   useEffect(() => {
     dispatch(loadData(gameModes));
@@ -72,6 +86,7 @@ function App() {
           transition={gameStateMotion.transition}
         >
           <h1 className="game-title">Tirage du premier joueur</h1>
+          <p>{ randFromArray(playerList) }</p>
         </motion.div>
       )}
 
