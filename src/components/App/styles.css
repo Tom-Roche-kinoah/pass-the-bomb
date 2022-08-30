@@ -1,0 +1,55 @@
+.app {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+.steps {
+  transition: left 400ms;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400vw;
+  height: 100vh;
+  display: flex;
+}
+
+.game-state {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  background-color: yellow;
+}
+
+.step {
+  flex-basis: 100vw;
+  flex-shrink: 0;
+  width: 100vw;
+  padding: 1rem;
+}
+
+.game-logo {
+  max-width: 100px;
+}
+.game-title {
+  font-size: 1.5rem;
+}
+
+.home {
+  background-color: red;
+}
+
+.mode {
+  background-color: yellowgreen;
+}
+
+.first-player {
+  background-color: lightblue;
+}
+
+.game {
+  background-color: lightseagreen;
+}
