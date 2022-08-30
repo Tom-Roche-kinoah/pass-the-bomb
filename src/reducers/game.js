@@ -1,6 +1,7 @@
 export const initialState = {
   state: 1,
   players: [],
+  playerNameInput: '',
   bombMinTime: 20,
   bombMaxTime: 90,
   rounds: 5,
@@ -9,10 +10,21 @@ export const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'LOAD_DATA':
+    case 'SET_GAME_STATE':
       return {
         ...state,
-        isLoading: true,
+        state: action.newState,
+      };
+    case 'CHANGE_FIELD':
+      return {
+        ...state,
+        [action.input]: action.value,
+      };
+    case 'ADD_PLAYER':
+      return {
+        ...state,
+        players: [...state.players, state.playerNameInput],
+        playerNameInput: '',
       };
     default:
       return state;

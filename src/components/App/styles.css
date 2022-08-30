@@ -5,29 +5,23 @@
   overflow: hidden;
 }
 
-.steps {
-  transition: left 400ms;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 400vw;
-  height: 100vh;
-  display: flex;
-}
-
-.game-state {
+.game-state,
+.state-navigation {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
-  width: 100vw;
+  width: 100%;
   background-color: yellow;
+}
+.state-navigation {
+  top: initial;
+  bottom: 0;
 }
 
 .step {
-  flex-basis: 100vw;
-  flex-shrink: 0;
-  width: 100vw;
+  width: 100%;
+  height: 100vh;
   padding: 1rem;
 }
 
