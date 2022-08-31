@@ -1,7 +1,24 @@
 .add-player {
-  input,
-  button {
-    border: none;
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  .add-player-legend {
+    padding: 0 1rem;
+    width: 100%;
+  }
+  .player-name-input,
+  .player-name-add-button {
     padding: 1rem;
+  }
+  .player-name-input {
+    background-color: white;
+    width: 80%;
+  }
+  .player-name-add-button {
+    background-color: lightgray;
+    width: 20%;
   }
 }

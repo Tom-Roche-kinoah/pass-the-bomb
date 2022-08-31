@@ -30,9 +30,10 @@ function AddPLayer() {
       onSubmit={(e) => handleAddPlayer(e)}
       method="post"
     >
-      <p>Ajouter des joueurs :</p>
+      <p className="add-player-legend">Ajouter des joueurs :</p>
       <input
         id="playerNameInput"
+        className="player-name-input"
         type="text"
         placeholder="Nom de joueur"
         value={playerNameInput}
@@ -41,9 +42,10 @@ function AddPLayer() {
         onChange={(e) => dispatch(changeField(e.target.value, 'playerNameInput'))}
       />
       <button
+        className="player-name-add-button"
         type="submit"
       >
-        +
+        ✚
       </button>
     </form>
   );

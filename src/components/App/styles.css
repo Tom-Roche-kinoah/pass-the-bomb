@@ -1,7 +1,90 @@
+:root {
+  --main-color:deeppink;
+  --light-color:floralWhite;
+  --dark-color:rgb(42, 42, 40);
+}
+html {
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+body {
+  background-color:var(--light-color);
+  color:var(--dark-color);
+}
+
+/* Typo */
+h1, h2, h3, h4, h5, h6, p, pre, ul, ol, dl, blockquote {
+  margin: 0.67em 0;
+}
+ol, ul, dl {
+  padding-left: 0em;
+  list-style-type: none;
+}
+blockquote {
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+/* Basics */
+::selection {
+  background-color: var(--main-color);
+  color:var(--light-color);
+}
+a {
+  color:inherit;
+  /*text-decoration: none;*/
+}
+a:hover{
+  background-color: var(--dark-color);
+  color:var(--light-color);
+}
+input, button, textarea, select {
+  outline: none;
+  /* border:solid 1px var(--dark-color); */
+}
+/* input:invalid {
+  border-color:red;
+} */
+
+/* Tables */
+th, td {
+  border:solid 1px var(--dark-color);
+  padding:.5em 1em;
+}
+th {
+  background-color: var(--main-color);
+  color: var(--light-color);
+}
+
+
+/* Design */
+.wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+pre {
+  background-color: var(--dark-color);
+  color:limegreen;
+  padding:1em;
+}
+pre ::selection {
+  background-color: black;
+}
+header {
+  background-color: var(--main-color);
+  color:white;
+}
+
+/* Forms */
+input, button, textarea, select {
+  padding:.5rem 1rem;
+}
+
+
 .app {
   max-width: 500px;
   margin: 0 auto;
-  text-align: center;
   overflow: hidden;
 }
 
@@ -29,6 +112,7 @@
   max-width: 100px;
 }
 .game-title {
+  font-family: 'sf_black', sans-serif; 
   font-size: 1.5rem;
 }
 

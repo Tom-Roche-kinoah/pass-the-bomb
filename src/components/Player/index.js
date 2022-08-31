@@ -26,10 +26,11 @@ function Player({ playerName }) {
         {playerName}
       </span>
       <button
+        className="player-name-button-remove"
         type="button"
         onClick={() => handleRemovePlayer(playerName)}
       >
-        x
+        ✖
       </button>
     </motion.li>
   );
