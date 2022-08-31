@@ -1,9 +1,11 @@
 .game-mode-list {
   display: flex;
   flex-direction: column;
+  border-top: solid 2px white;
   .game-mode {
       text-align: left;
-      border-bottom: solid 2px black;
+      border-bottom: solid 2px white;
+      cursor: pointer;
       .game-mode-name {
         font-size: 1.1rem;
         font-weight: bold;

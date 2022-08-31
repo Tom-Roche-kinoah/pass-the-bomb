@@ -4,7 +4,7 @@ export const initialState = {
   playerNameInput: '',
   bombMinTime: 20,
   bombMaxTime: 90,
-  rounds: 5,
+  rounds: 9,
   gameModes: [],
   gameModeSelected: null,
   isLoading: false,
@@ -26,6 +26,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         gameModeSelected: action.gameModeId,
+      };
+    case 'SET_ROUNDS':
+      return {
+        ...state,
+        rounds: action.nbRounds,
       };
     case 'CHANGE_FIELD':
       return {

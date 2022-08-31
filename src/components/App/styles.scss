@@ -1,0 +1,155 @@
+:root {
+  --main-color:deeppink;
+  --light-color:floralWhite;
+  --dark-color:rgb(42, 42, 40);
+}
+html {
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+body {
+  background-color: darkslategrey;
+  color:var(--light-color);
+}
+
+/* Typo */
+h1, h2, h3, h4, h5, h6, p, pre, ul, ol, dl, blockquote {
+  margin: 0.67em 0;
+}
+ol, ul, dl {
+  padding-left: 0em;
+  list-style-type: none;
+}
+blockquote {
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+/* Basics */
+::selection {
+  background-color: var(--main-color);
+  color:var(--light-color);
+}
+a {
+  color:inherit;
+  /*text-decoration: none;*/
+}
+a:hover{
+  background-color: var(--dark-color);
+  color:var(--light-color);
+}
+input, button, textarea, select {
+  outline: none;
+  /* border:solid 1px var(--dark-color); */
+}
+/* input:invalid {
+  border-color:red;
+} */
+
+/* Tables */
+th, td {
+  border:solid 1px var(--dark-color);
+  padding:.5em 1em;
+}
+th {
+  background-color: var(--main-color);
+  color: var(--light-color);
+}
+
+
+/* Design */
+pre {
+  background-color: var(--dark-color);
+  color:limegreen;
+  padding:1em;
+}
+pre ::selection {
+  background-color: black;
+}
+header {
+  background-color: var(--main-color);
+  color:white;
+}
+
+/* Forms */
+input, button, textarea, select {
+  padding:.5rem 1rem;
+}
+
+html, body, #root, .app {
+  height: 100%;
+}
+
+.app {
+  max-width: 500px;
+  margin: 0 auto;
+  overflow: hidden;
+  user-select: none;
+}
+
+.game-state,
+.state-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  background-color: darkslateblue;
+}
+.state-navigation {
+  top: initial;
+  bottom: 0;
+}
+
+.step {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.prev-step,
+.next-step {
+  img {
+    width: 2rem;
+  }
+}
+
+.game-logo {
+  max-width: 100px;
+}
+.game-title {
+  font-family: 'sf_black', sans-serif; 
+  font-size: 1.5rem;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 10rem;
+}
+
+.mode {
+  .rounds {
+    display: flex;
+    gap: .5rem;
+    .round-btn {
+      transition: all .5s;
+      border: solid 2px white;
+    }
+    .active   {
+      background-color: black;
+    }
+  }
+}
+
+.first-player {
+}
+
+.game {
+}

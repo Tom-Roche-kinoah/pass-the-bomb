@@ -16,6 +16,12 @@ export const setGameMode = (gameModeId) => ({
   gameModeId,
 });
 
+export const SET_ROUNDS = 'SET_ROUNDS';
+export const setRounds = (nbRounds) => ({
+  type: SET_ROUNDS,
+  nbRounds,
+});
+
 export const CHANGE_FIELD = 'CHANGE_FIELD';
 export const changeField = (value, input) => ({
   type: 'CHANGE_FIELD',

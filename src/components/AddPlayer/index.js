@@ -1,4 +1,9 @@
+// modules
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+
+// components
+import NavButtonNext from 'src/components/NavButtonNext';
 
 // actions
 import { changeField, addPlayer } from 'src/actions/game';
@@ -7,9 +12,18 @@ import { changeField, addPlayer } from 'src/actions/game';
 import './styles.scss';
 
 function AddPLayer() {
+  useEffect(() => {
+    // document.getElementById('playerNameInput').focus();
+    document.getElementById('playerNameInput').onfocus = () => {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+    };
+  });
+
   const dispatch = useDispatch();
   const playerList = useSelector((state) => (state.game.players));
   const playerNameInput = useSelector((state) => (state.game.playerNameInput));
+  const playerCounter = playerList.length;
 
   const handleAddPlayer = (e) => {
     e.preventDefault();
@@ -30,12 +44,11 @@ function AddPLayer() {
       onSubmit={(e) => handleAddPlayer(e)}
       method="post"
     >
-      <p className="add-player-legend">Ajouter des joueurs :</p>
       <input
         id="playerNameInput"
         className="player-name-input"
         type="text"
-        placeholder="Nom de joueur"
+        placeholder="Ajouter un joueur"
         value={playerNameInput}
         name="playerNameInput"
         required="required"
@@ -47,6 +60,9 @@ function AddPLayer() {
       >
         ✚
       </button>
+      {playerCounter > 1 && (
+        <NavButtonNext newState={2} />
+      )}
     </form>
   );
 }
