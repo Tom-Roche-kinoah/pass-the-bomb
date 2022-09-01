@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 // actions
-import { loadData, setRounds } from 'src/actions/game';
+import { loadData, setGameState } from 'src/actions/game';
 import gameModes from 'src/data/gameModes';
 
 // components
@@ -13,10 +13,15 @@ import AddPlayer from 'src/components/AddPlayer';
 import GameModes from 'src/components/GameModes';
 import NavButtonPrevious from 'src/components/NavButtonPrevious';
 import NavButtonNext from 'src/components/NavButtonNext';
+import RoundButton from 'src/components/RoundButton';
 
 // design
 import bombLogo from './bomb_icon.svg';
 import './styles.scss';
+import ticTac from '../../assets/media/tic-tac.mp3';
+
+const audioTicTac = new Audio(ticTac);
+audioTicTac.loop = true;
 
 function App() {
   const dispatch = useDispatch();
@@ -37,16 +42,22 @@ function App() {
 
   const rounds = useSelector((state) => (state.game.rounds));
 
-  // function randomFirstAnim() {
-  //   setTimeout(() => {
-  //     alert(randFromArray(playerList));
-  //   }, 1000);
-  // }
-
   // on component load
   useEffect(() => {
     dispatch(loadData(gameModes));
   }, []);
+
+  // on gameState change
+  useEffect(() => {
+    if (gameState === 4) {
+      audioTicTac.play();
+      audioTicTac.loop = true;
+    }
+    else {
+      audioTicTac.pause();
+      audioTicTac.currentTime = 0.0;
+    }
+  }, [gameState]);
 
   return (
     <div className="app">
@@ -79,10 +90,11 @@ function App() {
           <h1 className="game-title">Nombre de manches</h1>
 
           <div className="rounds">
-            <button type="button" className={rounds === 6 ? 'round-btn active' : 'round-btn'} onClick={() => dispatch(setRounds(6))}>06</button>
-            <button type="button" className={rounds === 9 ? 'round-btn active' : 'round-btn'} onClick={() => dispatch(setRounds(9))}>09</button>
-            <button type="button" className={rounds === 12 ? 'round-btn active' : 'round-btn'} onClick={() => dispatch(setRounds(12))}>12</button>
-            <button type="button" className={rounds === 15 ? 'round-btn active' : 'round-btn'} onClick={() => dispatch(setRounds(15))}>15</button>
+            <RoundButton roundCurrent={rounds} rounds={3} />
+            <RoundButton roundCurrent={rounds} rounds={6} />
+            <RoundButton roundCurrent={rounds} rounds={9} />
+            <RoundButton roundCurrent={rounds} rounds={12} />
+            <RoundButton roundCurrent={rounds} rounds={15} />
           </div>
           <h1 className="game-title">Mode de jeu</h1>
           <GameModes />
@@ -100,7 +112,14 @@ function App() {
             <NavButtonPrevious newState={2} />
           </div>
           <h1 className="game-title">Tirage du premier joueur</h1>
-          <p>{ randFromArray(playerList) }</p>
+          <p>{ randFromArray(playerList) } commence</p>
+          <button
+            type="button"
+            className="play-btn"
+            onClick={() => dispatch(setGameState(4))}
+          >
+            JOUER !
+          </button>
         </motion.div>
       )}
 
@@ -111,7 +130,11 @@ function App() {
           animate={gameStateMotion.animate}
           transition={gameStateMotion.transition}
         >
+          <div className="navigation-buttons">
+            <NavButtonPrevious newState={3} />
+          </div>
           <h1 className="game-title">JEU !</h1>
+          <img className="game-logo" src={bombLogo} alt="Game Logo" />
         </motion.div>
       )}
 

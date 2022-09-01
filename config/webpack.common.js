@@ -77,6 +77,15 @@ module.exports = {
           filename: 'fonts/[hash][ext][query]'
         }
       },
+      // Audio
+      {
+        test: /\.mp3$/,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
 };
