@@ -1,12 +1,12 @@
 export const initialState = {
   state: 1,
-  players: ['Tommy', 'Louise', 'Camille'],
+  players: [],
   playerNameInput: '',
   bombMinTime: 20,
   bombMaxTime: 90,
   rounds: 9,
   gameModes: [],
-  gameModeSelected: null,
+  gameModeSelected: 1,
   isLoading: false,
 };
 

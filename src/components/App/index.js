@@ -14,6 +14,7 @@ import GameModes from 'src/components/GameModes';
 import NavButtonPrevious from 'src/components/NavButtonPrevious';
 import NavButtonNext from 'src/components/NavButtonNext';
 import RoundButton from 'src/components/RoundButton';
+import Bomb from 'src/components/Bomb';
 
 // design
 import bombLogo from './bomb_icon.svg';
@@ -59,14 +60,6 @@ function App() {
     }
   }, [gameState]);
 
-  // random question from game mode
-  const gameModeSelected = useSelector((state) => (state.game.gameModeSelected));
-  const randomQuestion = () => {
-    const gameMode = gameModes.find((mode) => mode.id === gameModeSelected);
-    const question = gameMode.data[Math.floor(Math.random() * gameMode.data.length)];
-    return `${gameMode.name} : ${question.toUpperCase()}`;
-  };
-
   return (
     <div className="app">
 
@@ -93,7 +86,7 @@ function App() {
         >
           <div className="navigation-buttons">
             <NavButtonPrevious newState={1} />
-            {/* <NavButtonNext newState={3} /> */}
+            <NavButtonNext newState={3} />
           </div>
           <h1 className="game-title">Nombre de manches</h1>
 
@@ -120,7 +113,11 @@ function App() {
             <NavButtonPrevious newState={2} />
           </div>
           <h1 className="game-title">Tirage du premier joueur</h1>
-          <p>{ randFromArray(playerList) } commence</p>
+          <p>
+            <span className="first-player-name">
+              { randFromArray(playerList) }
+            </span> commence
+          </p>
           <button
             type="button"
             className="play-btn"
@@ -142,8 +139,7 @@ function App() {
             <NavButtonPrevious newState={3} />
           </div>
           <h1 className="game-title">JEU !</h1>
-          <img className="game-logo" src={bombLogo} alt="Game Logo" />
-          <p>{randomQuestion()}</p>
+          <Bomb />
         </motion.div>
       )}
 

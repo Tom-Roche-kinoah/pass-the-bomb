@@ -1,0 +1,29 @@
+.bomb {
+  @keyframes rotation {
+    0%   {transform: rotate(0deg) scale(1)}
+    50%   {transform: rotate(180deg) scale(1.5)}
+    100% {transform: rotate(360deg) scale(1)}
+  }
+  .game-logo {
+    max-width: 200px;
+    animation: rotation 6s steps(20, end) infinite;
+  }
+  .notice {
+    background-color: black;
+    padding: 2rem;
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    .rule {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    .question {
+      margin: 0;
+      font-family: 'sf_black', sans-serif;
+      font-size: 2rem;
+      color:yellow;
+    }
+  }
+}
