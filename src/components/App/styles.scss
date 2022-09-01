@@ -8,7 +8,8 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  background-color: darkslategrey;
+  // background-color: darkslategrey;
+  background: radial-gradient(circle,#206986 0,#392b60 100%);
   color:var(--light-color);
 }
 

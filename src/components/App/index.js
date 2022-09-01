@@ -59,6 +59,14 @@ function App() {
     }
   }, [gameState]);
 
+  // random question from game mode
+  const gameModeSelected = useSelector((state) => (state.game.gameModeSelected));
+  const randomQuestion = () => {
+    const gameMode = gameModes.find((mode) => mode.id === gameModeSelected);
+    const question = gameMode.data[Math.floor(Math.random() * gameMode.data.length)];
+    return `${gameMode.name} : ${question.toUpperCase()}`;
+  };
+
   return (
     <div className="app">
 
@@ -85,7 +93,7 @@ function App() {
         >
           <div className="navigation-buttons">
             <NavButtonPrevious newState={1} />
-            <NavButtonNext newState={3} />
+            {/* <NavButtonNext newState={3} /> */}
           </div>
           <h1 className="game-title">Nombre de manches</h1>
 
@@ -135,6 +143,7 @@ function App() {
           </div>
           <h1 className="game-title">JEU !</h1>
           <img className="game-logo" src={bombLogo} alt="Game Logo" />
+          <p>{randomQuestion()}</p>
         </motion.div>
       )}
 
