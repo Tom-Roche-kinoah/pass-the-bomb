@@ -13,6 +13,7 @@ import './styles.scss';
 
 function Bomb() {
   const gameModes = useSelector((state) => (state.game.gameModes));
+  const rounds = useSelector((state) => (state.game.rounds));
 
   // random question from game mode
   const gameModeSelectedId = useSelector((state) => (state.game.gameModeSelected));
@@ -21,6 +22,28 @@ function Bomb() {
   const randomQuestion = () => gameModeSelected
     .data[Math.floor(Math.random() * gameModeSelected.data.length)]
     .toUpperCase();
+
+  // random time before bomb explode !
+  const bombMinTime = useSelector((state) => (state.game.bombMinTime));
+  const bombMaxTime = useSelector((state) => (state.game.bombMaxTime));
+  const randomTimer = () => (
+    Math.floor((Math.random() * (bombMaxTime - bombMinTime + 1)) + bombMinTime)
+  );
+
+  const bombTimer = () => {
+    const delay = randomTimer();
+    let currentTime = 0;
+    const timer = setInterval(() => {
+      currentTime += 1;
+      console.log(currentTime);
+      if (currentTime >= delay) {
+        console.log('BooOooOOom !');
+        clearInterval(timer);
+      }
+    }, 1000);
+  };
+
+  bombTimer();
 
   return (
     <div className="bomb">
