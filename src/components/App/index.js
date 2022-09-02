@@ -17,9 +17,10 @@ import RoundButton from 'src/components/RoundButton';
 import Bomb from 'src/components/Bomb';
 
 // design
-import bombLogo from './bomb_icon.svg';
+import bombLogo from 'src/assets/img/game-logo.svg';
+import cogIcon from 'src/assets/img/cog-icon.svg';
 import './styles.scss';
-import ticTac from '../../assets/media/tic-tac.mp3';
+import ticTac from 'src/assets/media/tic-tac.mp3';
 
 const audioTicTac = new Audio(ticTac);
 audioTicTac.loop = true;
@@ -83,8 +84,18 @@ function App() {
           animate={gameStateMotion.animate}
           transition={gameStateMotion.transition}
         >
-          <img className="game-logo" src={bombLogo} alt="Game Logo" />
-          <h1 className="game-title">Passe La Bombe !</h1>
+          <button type="button" className="settings-btn">
+            <img src={cogIcon} alt="Settings" />
+          </button>
+          <motion.img
+            className="game-logo"
+            src={bombLogo}
+            alt="Game Logo"
+            initial={{ x: -100, opacity: 1, scale: 0 }}
+            animate={{ x: 0, opacity: 1, scale: 1 }}
+            transition={{ type: 'spring' }}
+          />
+          {/* <h1 className="game-title">Passe La Bombe !</h1> */}
           <PlayerList />
           <AddPlayer />
         </motion.div>
@@ -157,6 +168,11 @@ function App() {
           <Bomb />
         </motion.div>
       )}
+
+      <div className="settings">
+        <h1 className="game-title">Parametres</h1>
+
+      </div>
 
     </div>
   );
