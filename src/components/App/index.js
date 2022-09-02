@@ -49,16 +49,29 @@ function App() {
   }, []);
 
   // on gameState change
-  useEffect(() => {
-    if (gameState === 4) {
-      audioTicTac.play();
-      audioTicTac.loop = true;
-    }
-    else {
-      audioTicTac.pause();
-      audioTicTac.currentTime = 0.0;
-    }
-  }, [gameState]);
+  // useEffect(() => {
+  //   if (gameState === 4) {
+  //     audioTicTac.play();
+  //     audioTicTac.loop = true;
+  //   }
+  //   else {
+  //     audioTicTac.pause();
+  //     audioTicTac.currentTime = 0.0;
+  //   }
+  // }, [gameState]);
+
+  const handleSoundPlay = (sound) => {
+    sound.play();
+    sound.loop = true;
+  };
+  const handleSoundStop = (sound) => {
+    sound.pause();
+    sound.currentTime = 0.0;
+  };
+  const handlePlay = () => {
+    dispatch(setGameState(4));
+    handleSoundPlay(audioTicTac);
+  };
 
   return (
     <div className="app">
@@ -71,7 +84,7 @@ function App() {
           transition={gameStateMotion.transition}
         >
           <img className="game-logo" src={bombLogo} alt="Game Logo" />
-          <h1 className="game-title">Pass the bomb !</h1>
+          <h1 className="game-title">Passe La Bombe !</h1>
           <PlayerList />
           <AddPlayer />
         </motion.div>
@@ -121,7 +134,7 @@ function App() {
           <button
             type="button"
             className="play-btn"
-            onClick={() => dispatch(setGameState(4))}
+            onClick={() => handlePlay()}
           >
             JOUER !
           </button>
@@ -136,7 +149,9 @@ function App() {
           transition={gameStateMotion.transition}
         >
           <div className="navigation-buttons">
-            <NavButtonPrevious newState={3} />
+            <div onClick={() => handleSoundStop(audioTicTac)}>
+              <NavButtonPrevious newState={3} />
+            </div>
           </div>
           <h1 className="game-title">JEU !</h1>
           <Bomb />

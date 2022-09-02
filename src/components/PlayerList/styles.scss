@@ -5,13 +5,14 @@
   gap: .5rem;
   .player-name {
     background-color: black;
-    
+    border-radius: .5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     .player-name-text {
       word-break: break-all;
       padding: .5rem;
+      padding-left: .8rem;
     }
     .player-name-button-remove {
       padding: .5rem;

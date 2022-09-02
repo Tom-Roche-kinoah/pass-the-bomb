@@ -1,6 +1,6 @@
 export const initialState = {
   state: 1,
-  players: [],
+  players: ['Tom', 'Louise'],
   playerNameInput: '',
   bombMinTime: 20,
   bombMaxTime: 90,

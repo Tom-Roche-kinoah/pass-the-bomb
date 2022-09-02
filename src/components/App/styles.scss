@@ -11,6 +11,7 @@ body {
   // background-color: darkslategrey;
   background: radial-gradient(circle,#206986 0,#392b60 100%);
   color:var(--light-color);
+  overflow: hidden;
 }
 
 /* Typo */
@@ -87,11 +88,12 @@ html, body, #root, .app {
   margin: 0 auto;
   overflow: hidden;
   user-select: none;
+  position: relative;
 }
 
 .game-state,
 .state-navigation {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 999;
@@ -121,7 +123,9 @@ html, body, #root, .app {
 }
 
 .game-logo {
-  max-width: 100px;
+  max-width: 200px;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 50px white);
 }
 .game-title {
   font-family: 'sf_black', sans-serif; 
@@ -133,7 +137,7 @@ html, body, #root, .app {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 10rem;
+  padding-bottom: 6rem;
 }
 
 .mode {
@@ -146,6 +150,7 @@ html, body, #root, .app {
     .round-btn {
       transition: all .5s;
       border: solid 2px white;
+      border-radius: .5rem;
     }
     .active   {
       border: solid 2px black;
@@ -165,6 +170,7 @@ html, body, #root, .app {
     font-family: 'sf_black', sans-serif;
     background-color: black;
     padding: 2rem;
+    border-radius: .5rem;
   }
 }
 
