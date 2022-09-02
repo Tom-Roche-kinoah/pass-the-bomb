@@ -126,6 +126,14 @@ html, body, #root, .app {
   font-family: 'sf_black', sans-serif; 
   font-size: 1.5rem;
 }
+.categorie-title {
+  font-family: 'sf_light', sans-serif; 
+  font-size: 1.3rem;
+  padding-top: 1rem;
+}
+.info-credit {
+  font-size: .8rem;
+}
 
 .home {
   text-align: center;
@@ -139,13 +147,56 @@ html, body, #root, .app {
     right: 0;
     padding: 1rem;
     img {
+      transition: 1s;
       width: 2rem;
+    }
+    &.open img {
+      transform: rotate(0);
+      transform: rotate(90deg);
     }
   }
   .game-logo {
     max-width: 100%;
     margin: 0 auto;
     // filter: drop-shadow(0 0 50px white);
+  }
+}
+
+.settings {
+  top: 110%;
+  left: .5rem;
+  &.open {
+    top: .5rem;
+  }
+  transition: top .3s ease;
+  border-radius: 1rem;
+  box-shadow: 0 0 30px black;
+  padding: 2rem;
+  position: fixed;
+  z-index: 999;
+  width: calc(100% - 1rem);
+  height: calc(100% - 1rem);
+  background: radial-gradient(circle,#206986 0,#392b60 100%);
+  .option-group {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  .close-settings-btn {
+    position: absolute;
+    top: 0;
+    right: .4rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+  .bomb-setting-btn {
+    border: solid 2px white;
+    border-radius: .5rem;
+  }
+  .active   {
+    border: solid 2px black;
+    background-color: black;
+    color: yellow;
   }
 }
 

@@ -1,6 +1,6 @@
 // modules
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 // actions
@@ -14,6 +14,7 @@ import GameModes from 'src/components/GameModes';
 import NavButtonPrevious from 'src/components/NavButtonPrevious';
 import NavButtonNext from 'src/components/NavButtonNext';
 import RoundButton from 'src/components/RoundButton';
+import BombSettingButton from 'src/components/BombSettingButton';
 import Bomb from 'src/components/Bomb';
 
 // design
@@ -41,8 +42,6 @@ function App() {
     const randomIndex = Math.floor(Math.random() * arrayLength);
     return array[randomIndex];
   };
-
-  const rounds = useSelector((state) => (state.game.rounds));
 
   // on component load
   useEffect(() => {
@@ -74,9 +73,16 @@ function App() {
     handleSoundPlay(audioTicTac);
   };
 
+  // settings
+  const [settingPannel, setSettingPannel] = useState(false);
+  const rounds = useSelector((state) => (state.game.rounds));
+  const bombMinTime = useSelector((state) => (state.game.bombMinTime));
+  const bombMaxTime = useSelector((state) => (state.game.bombMaxTime));
+
   return (
     <div className="app">
 
+      {/* Home */}
       { gameState === 1 && (
         <motion.div
           className="home step step-1"
@@ -84,7 +90,11 @@ function App() {
           animate={gameStateMotion.animate}
           transition={gameStateMotion.transition}
         >
-          <button type="button" className="settings-btn">
+          <button
+            type="button"
+            className={settingPannel ? 'settings-btn open' : 'settings-btn'}
+            onClick={() => setSettingPannel(true)}
+          >
             <img src={cogIcon} alt="Settings" />
           </button>
           <motion.img
@@ -101,6 +111,7 @@ function App() {
         </motion.div>
       )}
 
+      {/* Game Mode */}
       { gameState === 2 && (
         <motion.div
           className="mode step step-2"
@@ -126,6 +137,7 @@ function App() {
         </motion.div>
       )}
 
+      {/* Random first Player */}
       { gameState === 3 && (
         <motion.div
           className="first-player step step-3"
@@ -152,6 +164,7 @@ function App() {
         </motion.div>
       )}
 
+      {/* Run Game */}
       { gameState === 4 && (
         <motion.div
           className="game step step-4"
@@ -169,9 +182,66 @@ function App() {
         </motion.div>
       )}
 
-      <div className="settings">
+      {/* Settings Pannel */}
+      <div className={settingPannel ? 'settings open' : 'settings'}>
+        <button
+          className="close-settings-btn"
+          type="button"
+          onClick={() => setSettingPannel(false)}
+        >
+          ✖
+        </button>
         <h1 className="game-title">Parametres</h1>
+        <p className="categorie-title">Timer de la bombe</p>
+        <p className="option-group">
+          <span>Min :</span>
+          <BombSettingButton
+            bombSetting="bombMinTime"
+            currentValue={bombMinTime}
+            value={10}
+            text="10"
+          />
+          <BombSettingButton
+            bombSetting="bombMinTime"
+            currentValue={bombMinTime}
+            value={20}
+            text="20"
+          />
+          <BombSettingButton
+            bombSetting="bombMinTime"
+            currentValue={bombMinTime}
+            value={30}
+            text="30"
+          />
+        </p>
+        <p className="option-group">
+          <span>Max :</span>
+          <BombSettingButton
+            bombSetting="bombMaxTime"
+            currentValue={bombMaxTime}
+            value={50}
+            text="50"
+          />
+          <BombSettingButton
+            bombSetting="bombMaxTime"
+            currentValue={bombMaxTime}
+            value={70}
+            text="70"
+          />
+          <BombSettingButton
+            bombSetting="bombMaxTime"
+            currentValue={bombMaxTime}
+            value={90}
+            text="90"
+          />
+        </p>
+        <p className="categorie-title">Informations & crédits</p>
+        <p className="info-credit">
+          Application réalisée par <strong>Kinoah.com</strong><br />
+          TechStack : JS, React.<br />
+          Illustration d'accueil basée sur celle de <strong>brgfx</strong>
 
+        </p>
       </div>
 
     </div>

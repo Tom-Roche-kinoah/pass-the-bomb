@@ -22,6 +22,13 @@ export const setRounds = (nbRounds) => ({
   nbRounds,
 });
 
+export const SET_BOMB_SETTING = 'SET_BOMB_SETTING';
+export const setBombSetting = (bombSetting, value) => ({
+  type: SET_BOMB_SETTING,
+  bombSetting,
+  value,
+});
+
 export const CHANGE_FIELD = 'CHANGE_FIELD';
 export const changeField = (value, input) => ({
   type: 'CHANGE_FIELD',

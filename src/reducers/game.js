@@ -32,6 +32,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         rounds: action.nbRounds,
       };
+    case 'SET_BOMB_SETTING':
+      return {
+        ...state,
+        [action.bombSetting]: action.value,
+      };
     case 'CHANGE_FIELD':
       return {
         ...state,
