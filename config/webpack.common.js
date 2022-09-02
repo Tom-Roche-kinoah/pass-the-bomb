@@ -79,13 +79,14 @@ module.exports = {
       },
       // Audio
       {
-        test: /\.mp3$/,
+        test: /\.(mp3)$/i,
         use: [
           {
             loader: 'file-loader',
+            options: { outputPath: 'sound/' },
           },
         ],
-      },
+      },     
     ],
   },
 };
