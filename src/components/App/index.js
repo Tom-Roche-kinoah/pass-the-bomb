@@ -15,6 +15,7 @@ import NavButtonPrevious from 'src/components/NavButtonPrevious';
 import NavButtonNext from 'src/components/NavButtonNext';
 import RoundButton from 'src/components/RoundButton';
 import BombSettingButton from 'src/components/BombSettingButton';
+import Rules from 'src/components/Rules';
 import Bomb from 'src/components/Bomb';
 
 // design
@@ -22,9 +23,12 @@ import bombLogo from 'src/assets/img/game-logo.svg';
 import cogIcon from 'src/assets/img/cog-icon.svg';
 import './styles.scss';
 import ticTac from 'src/assets/media/tic-tac.mp3';
+import select from 'src/assets/media/select3.mp3';
 
 const audioTicTac = new Audio(ticTac);
 audioTicTac.loop = true;
+const audioSelect = new Audio(select);
+audioSelect.loop = false;
 
 function App() {
   const dispatch = useDispatch();
@@ -48,29 +52,14 @@ function App() {
     dispatch(loadData(gameModes));
   }, []);
 
-  // on gameState change
-  // useEffect(() => {
-  //   if (gameState === 4) {
-  //     audioTicTac.play();
-  //     audioTicTac.loop = true;
-  //   }
-  //   else {
-  //     audioTicTac.pause();
-  //     audioTicTac.currentTime = 0.0;
-  //   }
-  // }, [gameState]);
+  const handlePlay = () => {
+    dispatch(setGameState(4));
+    // handleSoundPlay(audioTicTac);
+  };
 
   const handleSoundPlay = (sound) => {
     sound.play();
-    sound.loop = true;
-  };
-  const handleSoundStop = (sound) => {
-    sound.pause();
     sound.currentTime = 0.0;
-  };
-  const handlePlay = () => {
-    dispatch(setGameState(4));
-    handleSoundPlay(audioTicTac);
   };
 
   // settings
@@ -125,7 +114,7 @@ function App() {
           </div>
           <h1 className="game-title">Nombre de manches</h1>
 
-          <div className="rounds">
+          <div className="rounds" onClick={() => handleSoundPlay(audioSelect)}>
             <RoundButton roundCurrent={rounds} rounds={3} />
             <RoundButton roundCurrent={rounds} rounds={6} />
             <RoundButton roundCurrent={rounds} rounds={9} />
@@ -149,7 +138,7 @@ function App() {
             <NavButtonPrevious newState={2} />
           </div>
           <h1 className="game-title">Tirage du premier joueur</h1>
-          <p>
+          <p className="categorie-title">
             <span className="first-player-name">
               { randFromArray(playerList) }
             </span> commence
@@ -161,6 +150,7 @@ function App() {
           >
             JOUER !
           </button>
+          <Rules />
         </motion.div>
       )}
 
@@ -173,9 +163,7 @@ function App() {
           transition={gameStateMotion.transition}
         >
           <div className="navigation-buttons">
-            <div onClick={() => handleSoundStop(audioTicTac)}>
-              <NavButtonPrevious newState={3} />
-            </div>
+            <NavButtonPrevious newState={3} />
           </div>
           <h1 className="game-title">JEU !</h1>
           <Bomb />
@@ -193,7 +181,7 @@ function App() {
         </button>
         <h1 className="game-title">Parametres</h1>
         <p className="categorie-title">Timer de la bombe</p>
-        <p className="option-group">
+        <p className="option-group" onClick={() => handleSoundPlay(audioSelect)}>
           <span>Min :</span>
           <BombSettingButton
             bombSetting="bombMinTime"
@@ -214,7 +202,7 @@ function App() {
             text="30"
           />
         </p>
-        <p className="option-group">
+        <p className="option-group" onClick={() => handleSoundPlay(audioSelect)}>
           <span>Max :</span>
           <BombSettingButton
             bombSetting="bombMaxTime"

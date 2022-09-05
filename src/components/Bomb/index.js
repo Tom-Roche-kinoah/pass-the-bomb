@@ -1,4 +1,5 @@
 // modules
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
@@ -6,14 +7,24 @@ import { motion } from 'framer-motion';
 import { } from 'src/actions/game';
 
 // components
+import PlayerList from 'src/components/PlayerList';
 
 // design
-import bombLogo from '../App/bomb_icon.svg';
+import bombLogo from 'src/components/App/bomb_icon.svg';
 import './styles.scss';
+import explosion from 'src/assets/media/explosion-01.mp3';
+import ticTac from 'src/assets/media/tic-tac.mp3';
+
+const audioTicTac = new Audio(ticTac);
+audioTicTac.loop = true;
+
+const audioExplosion = new Audio(explosion);
+audioExplosion.loop = false;
 
 function Bomb() {
   const gameModes = useSelector((state) => (state.game.gameModes));
-  const rounds = useSelector((state) => (state.game.rounds));
+  // const rounds = useSelector((state) => (state.game.rounds));
+  const [roundEnd, setRoundEnd] = useState(false);
 
   // random question from game mode
   const gameModeSelectedId = useSelector((state) => (state.game.gameModeSelected));
@@ -31,23 +42,29 @@ function Bomb() {
   );
 
   const bombTimer = () => {
+    if (roundEnd) return;
+    // start tic tac
+    audioTicTac.play();
     const delay = randomTimer();
     let currentTime = 0;
     const timer = setInterval(() => {
       currentTime += 1;
-      console.log(currentTime);
+      // console.log(currentTime);
       if (currentTime >= delay) {
-        console.log('BooOooOOom !');
+        // console.log('BooOooOOom !');
+        audioTicTac.pause();
+        audioTicTac.currentTime = 0.0;
+        audioExplosion.play();
+        setRoundEnd(true);
         clearInterval(timer);
       }
     }, 1000);
   };
 
-  bombTimer();
-
   return (
     <div className="bomb">
       <img className="game-logo" src={bombLogo} alt="Game Logo" />
+      {bombTimer()}
       <motion.div
         className="notice"
         initial={{ x: -300, opacity: 1, scale: 1 }}
@@ -57,6 +74,19 @@ function Bomb() {
         <p className="rule">{gameRule}</p>
         <p className="question">{randomQuestion()}</p>
       </motion.div>
+
+      {roundEnd && (
+        <motion.div
+          className="boom-screen"
+          initial={{ x: 0, opacity: 1, scale: 0 }}
+          animate={{ x: 0, opacity: 1, scale: 1 }}
+          transition={{ type: 'spring' }}
+        >
+          <p className="game-title">Boom !</p>
+          <p>Qui a explosé ?</p>
+          <PlayerList />
+        </motion.div>
+      )}
     </div>
   );
 }
