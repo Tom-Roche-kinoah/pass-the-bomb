@@ -1,10 +1,12 @@
 export const initialState = {
   state: 1,
   players: ['Tom', 'Louise'],
+  scores: [],
   playerNameInput: '',
   bombMinTime: 20,
   bombMaxTime: 90,
   rounds: 9,
+  currentRound: 1,
   gameModes: [],
   gameModeSelected: 1,
   isLoading: false,
@@ -52,6 +54,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         players: action.newPlayerList,
+      };
+    case 'ENDING_ROUND':
+      return {
+        ...state,
+        currentRound: state.currentRound + 1,
       };
     default:
       return state;

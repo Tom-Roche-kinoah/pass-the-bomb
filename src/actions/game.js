@@ -46,3 +46,8 @@ export const removePlayer = (newPlayerList) => ({
   type: 'REMOVE_PLAYER',
   newPlayerList,
 });
+
+export const ENDING_ROUND = 'ENDING_ROUND';
+export const endingRound = () => ({
+  type: 'ENDING_ROUND',
+});

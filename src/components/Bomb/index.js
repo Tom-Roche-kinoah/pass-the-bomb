@@ -1,13 +1,13 @@
 // modules
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
 // actions
-import { } from 'src/actions/game';
+import { endingRound } from 'src/actions/game';
 
 // components
-import PlayerList from 'src/components/PlayerList';
+import RoundEndScreen from 'src/components/RoundEndScreen';
 
 // design
 import bombLogo from 'src/components/App/bomb_icon.svg';
@@ -22,8 +22,10 @@ const audioExplosion = new Audio(explosion);
 audioExplosion.loop = false;
 
 function Bomb() {
+  const dispatch = useDispatch();
   const gameModes = useSelector((state) => (state.game.gameModes));
-  // const rounds = useSelector((state) => (state.game.rounds));
+  const rounds = useSelector((state) => (state.game.rounds));
+  const currentRound = useSelector((state) => (state.game.currentRound));
   const [roundEnd, setRoundEnd] = useState(false);
 
   // random question from game mode
@@ -56,13 +58,15 @@ function Bomb() {
         audioTicTac.currentTime = 0.0;
         audioExplosion.play();
         setRoundEnd(true);
+        dispatch(endingRound());
         clearInterval(timer);
       }
-    }, 1000);
+    }, 100);
   };
 
   return (
     <div className="bomb">
+      <p>Manche {currentRound} sur {rounds}</p>
       <img className="game-logo" src={bombLogo} alt="Game Logo" />
       {bombTimer()}
       <motion.div
@@ -82,9 +86,7 @@ function Bomb() {
           animate={{ x: 0, opacity: 1, scale: 1 }}
           transition={{ type: 'spring' }}
         >
-          <p className="game-title">Boom !</p>
-          <p>Qui a explosé ?</p>
-          <PlayerList />
+          <RoundEndScreen />
         </motion.div>
       )}
     </div>

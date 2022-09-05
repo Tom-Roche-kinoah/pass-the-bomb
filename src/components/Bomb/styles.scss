@@ -31,9 +31,11 @@
     background-color: black;
     padding: 2rem;
     position: absolute;
+    top: 4rem;
     bottom: 2rem;
     left: 2rem;
     right: 2rem;
     border-radius: 1rem;
+    overflow: auto;
   }
 }
