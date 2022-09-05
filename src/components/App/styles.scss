@@ -131,8 +131,13 @@ html, body, #root, .app {
   font-size: 1.3rem;
   padding-top: 1rem;
 }
-.info-credit {
-  font-size: .8rem;
+
+.credit-zone {
+  position: absolute;
+  bottom: 0;
+  .info-credit {
+    font-size: .8rem;
+  }
 }
 
 .home {

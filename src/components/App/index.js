@@ -223,13 +223,14 @@ function App() {
             text="90"
           />
         </p>
-        <p className="categorie-title">Informations & crédits</p>
-        <p className="info-credit">
-          Application réalisée par <strong>Kinoah.com</strong><br />
-          TechStack : JS, React.<br />
-          Illustration d'accueil basée sur celle de <strong>brgfx</strong>
-
-        </p>
+        <div className="credit-zone">
+          <p className="categorie-title">Informations & crédits</p>
+          <p className="info-credit">
+            Application réalisée par <strong>Kinoah.com</strong><br />
+            TechStack : JS, React.<br />
+            Illustration d'accueil basée sur celle de <strong><a href="https://fr.freepik.com/vecteurs-libre/bulle-dialogue-comique-texte-boom_13578063.htm#query=bomb&position=1&from_view=search" target="_blank" rel="noreferrer">brgfx</a> sur Freepik</strong>
+          </p>
+        </div>
       </div>
 
     </div>
