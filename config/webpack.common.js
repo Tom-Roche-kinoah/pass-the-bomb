@@ -17,7 +17,7 @@ module.exports = {
   ],
   output: {
     path: paths.build,
-    publicPath: '/',
+    publicPath: '',
     filename: 'js/[name].[contenthash].js',
   },
   resolve: {
@@ -63,7 +63,7 @@ module.exports = {
       },
       // Images
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
         type: 'asset/resource',
         generator: {
           filename: 'images/[hash][ext][query]'
@@ -71,7 +71,7 @@ module.exports = {
       },
       // Fonts and SVGs
       {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        test: /\.(woff(2)?|eot|ttf|otf|)$/,
         type: 'asset',
         generator: {
           filename: 'fonts/[hash][ext][query]'
