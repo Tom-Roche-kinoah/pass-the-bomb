@@ -226,10 +226,10 @@ html, body, #root, .app {
   }
   .close-settings-btn {
     position: absolute;
-    top: 0;
+    top: -1rem;
     right: .4rem;
     padding: 1rem;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
   .bomb-setting-btn {
     border: solid 2px white;
@@ -279,6 +279,9 @@ html, body, #root, .app {
 
 .game {
   text-align: center;
+  // background-image: url('src/assets/img/bg-01.gif');
+  // background-size: cover;
+  // background-position: center;
 }
 
 .rules {

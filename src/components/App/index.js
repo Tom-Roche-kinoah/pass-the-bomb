@@ -221,7 +221,7 @@ function App() {
           type="button"
           onClick={() => setSettingPannel(false)}
         >
-          ✖
+          ×
         </button>
         <h1 className="game-title">Parametres</h1>
         <p className="categorie-title">Timer de la bombe (en secondes)</p>
