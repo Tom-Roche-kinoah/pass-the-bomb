@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
 // actions
-import { endingRound } from 'src/actions/game';
+import { endingRound, setGameState } from 'src/actions/game';
 
 // components
 import RoundEndScreen from 'src/components/RoundEndScreen';
@@ -40,6 +40,8 @@ function Bomb() {
     Math.floor((Math.random() * (bombMaxTime - bombMinTime + 1)) + bombMinTime)
   );
 
+
+  let timer = null;
   const bombTimer = () => {
     if (roundEnd) return;
     // start tic tac
@@ -47,7 +49,7 @@ function Bomb() {
     audioTicTac.loop = true;
     const delay = randomTimer();
     let currentTime = 0;
-    const timer = setInterval(() => {
+    timer = setInterval(() => {
       currentTime += 1;
       // console.log(currentTime);
       if (currentTime >= delay) {
@@ -59,15 +61,29 @@ function Bomb() {
         dispatch(endingRound());
         clearInterval(timer);
       }
-    }, 1000);
+    }, 100);
   };
 
   useEffect(() => {
     bombTimer();
   }, []);
 
+  const handleStopGame = () => {
+    audioTicTac.currentTime = 0.0;
+    audioTicTac.pause();
+    clearInterval(timer);
+    dispatch(setGameState(2));
+  };
+
   return (
     <div className="bomb">
+      <button
+        className="stop-game-btn"
+        type="button"
+        onClick={() => handleStopGame()}
+      >
+        ✖
+      </button>
       <p>Manche {currentRound} sur {rounds}</p>
       <img className="game-logo" src={bombLogo} alt="Game Logo" />
       <motion.div

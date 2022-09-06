@@ -123,7 +123,6 @@ function App() {
           animate={gameStateMotion.animate}
           transition={gameStateMotion.transition}
         >
-          
           <div className="navigation-buttons">
             <NavButtonPrevious newState={1} />
             <NavButtonNext newState={3} />
@@ -179,7 +178,7 @@ function App() {
           transition={gameStateMotion.transition}
         >
           <div className="navigation-buttons">
-            <NavButtonPrevious newState={2} />
+            {/* <NavButtonPrevious newState={2} /> */}
           </div>
           <h1 className="game-title">JEU !</h1>
           <Bomb />
