@@ -40,7 +40,6 @@ function Bomb() {
     Math.floor((Math.random() * (bombMaxTime - bombMinTime + 1)) + bombMinTime)
   );
 
-
   let timer = null;
   const bombTimer = () => {
     if (roundEnd) return;
@@ -61,7 +60,7 @@ function Bomb() {
         dispatch(endingRound());
         clearInterval(timer);
       }
-    }, 100);
+    }, 1000);
   };
 
   useEffect(() => {
