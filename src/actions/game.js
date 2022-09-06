@@ -51,3 +51,14 @@ export const ENDING_ROUND = 'ENDING_ROUND';
 export const endingRound = () => ({
   type: 'ENDING_ROUND',
 });
+
+export const PLAYER_LOSE = 'PLAYER_LOSE';
+export const playerLose = (player) => ({
+  type: 'PLAYER_LOSE',
+  player,
+});
+
+export const RESET_GAME = 'RESET_GAME';
+export const resetGame = () => ({
+  type: 'RESET_GAME',
+});

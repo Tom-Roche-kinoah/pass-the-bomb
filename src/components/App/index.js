@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 // actions
-import { loadData, setGameState } from 'src/actions/game';
+import { loadData, setGameState, resetGame } from 'src/actions/game';
 import gameModes from 'src/data/gameModes';
 
 // components
@@ -22,11 +22,8 @@ import Bomb from 'src/components/Bomb';
 import bombLogo from 'src/assets/img/game-logo.svg';
 import cogIcon from 'src/assets/img/cog-icon.svg';
 import './styles.scss';
-import ticTac from 'src/assets/media/tic-tac.mp3';
 import select from 'src/assets/media/select3.mp3';
 
-const audioTicTac = new Audio(ticTac);
-audioTicTac.loop = true;
 const audioSelect = new Audio(select);
 audioSelect.loop = false;
 
@@ -52,14 +49,33 @@ function App() {
     dispatch(loadData(gameModes));
   }, []);
 
+  // on gameState change
+  useEffect(() => {
+    if (gameState === 2) {
+      dispatch(resetGame());
+    }
+  }, [gameState]);
+
   const handlePlay = () => {
     dispatch(setGameState(4));
-    // handleSoundPlay(audioTicTac);
   };
 
   const handleSoundPlay = (sound) => {
     sound.play();
     sound.currentTime = 0.0;
+  };
+
+  const scores = useSelector((state) => (state.game.scores));
+  const endGameRanking = () => {
+    // count explosion by player
+    const ranking = [];
+    const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+    playerList.forEach((player) => {
+      ranking.push([player, countOccurrences(scores, player)]);
+    });
+
+    // sort & return the result
+    return ranking.sort((a, b) => (a)[1] - (b)[1]);
   };
 
   // settings
@@ -94,7 +110,6 @@ function App() {
             animate={{ x: 0, opacity: 1, scale: 1 }}
             transition={{ type: 'spring' }}
           />
-          {/* <h1 className="game-title">Passe La Bombe !</h1> */}
           <PlayerList />
           <AddPlayer />
         </motion.div>
@@ -108,6 +123,7 @@ function App() {
           animate={gameStateMotion.animate}
           transition={gameStateMotion.transition}
         >
+          
           <div className="navigation-buttons">
             <NavButtonPrevious newState={1} />
             <NavButtonNext newState={3} />
@@ -163,11 +179,40 @@ function App() {
           transition={gameStateMotion.transition}
         >
           <div className="navigation-buttons">
-            <NavButtonPrevious newState={3} />
+            <NavButtonPrevious newState={2} />
           </div>
           <h1 className="game-title">JEU !</h1>
           <Bomb />
         </motion.div>
+      )}
+
+      {/* End Game */}
+      { gameState === 5 && (
+      <motion.div
+        className="game step step-5"
+        initial={gameStateMotion.initial}
+        animate={gameStateMotion.animate}
+        transition={gameStateMotion.transition}
+      >
+        <div className="navigation-buttons">
+          <NavButtonPrevious newState={2} />
+        </div>
+        <h1 className="game-title">Fin de la partie</h1>
+        <div className="score-board">
+          <p className="categorie-title">Classement :</p>
+          {endGameRanking().map(([player, score], i) => (
+            <p
+              // eslint-disable-next-line react/no-array-index-key
+              key={i}
+              className={i === 0 ? 'player winner' : 'player'}
+            >
+              <span className="player-name">{player}</span>
+              <span className="player-score">{score}</span>
+            </p>
+          ))}
+        </div>
+
+      </motion.div>
       )}
 
       {/* Settings Pannel */}

@@ -1,5 +1,5 @@
 // modules
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
@@ -16,10 +16,7 @@ import explosion from 'src/assets/media/explosion-01.mp3';
 import ticTac from 'src/assets/media/tic-tac.mp3';
 
 const audioTicTac = new Audio(ticTac);
-audioTicTac.loop = true;
-
 const audioExplosion = new Audio(explosion);
-audioExplosion.loop = false;
 
 function Bomb() {
   const dispatch = useDispatch();
@@ -47,6 +44,7 @@ function Bomb() {
     if (roundEnd) return;
     // start tic tac
     audioTicTac.play();
+    audioTicTac.loop = true;
     const delay = randomTimer();
     let currentTime = 0;
     const timer = setInterval(() => {
@@ -54,21 +52,24 @@ function Bomb() {
       // console.log(currentTime);
       if (currentTime >= delay) {
         // console.log('BooOooOOom !');
-        audioTicTac.pause();
         audioTicTac.currentTime = 0.0;
+        audioTicTac.pause();
         audioExplosion.play();
         setRoundEnd(true);
         dispatch(endingRound());
         clearInterval(timer);
       }
-    }, 100);
+    }, 1000);
   };
+
+  useEffect(() => {
+    bombTimer();
+  }, []);
 
   return (
     <div className="bomb">
       <p>Manche {currentRound} sur {rounds}</p>
       <img className="game-logo" src={bombLogo} alt="Game Logo" />
-      {bombTimer()}
       <motion.div
         className="notice"
         initial={{ x: -300, opacity: 1, scale: 1 }}

@@ -1,14 +1,26 @@
 // modules
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+// actions
+import { playerLose, setGameState } from 'src/actions/game';
 
 // design
 import './styles.scss';
 
 function RoundEndScreen() {
+  const dispatch = useDispatch();
   const playerList = useSelector((state) => (state.game.players));
+  const rounds = useSelector((state) => (state.game.rounds));
+  const currentRound = useSelector((state) => (state.game.currentRound));
 
   const handleSelectLoser = (player) => {
-    alert(player);
+    // save loser player
+    dispatch(playerLose(player));
+    dispatch(setGameState(3));
+    // if no rounds left
+    if (currentRound > rounds) {
+      dispatch(setGameState(5));
+    }
   };
 
   return (

@@ -1,6 +1,6 @@
 export const initialState = {
   state: 1,
-  players: ['Tom', 'Louise'],
+  players: [],
   scores: [],
   playerNameInput: '',
   bombMinTime: 20,
@@ -59,6 +59,17 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         currentRound: state.currentRound + 1,
+      };
+    case 'PLAYER_LOSE':
+      return {
+        ...state,
+        scores: [...state.scores, action.player],
+      };
+    case 'RESET_GAME':
+      return {
+        ...state,
+        scores: [],
+        currentRound: 1,
       };
     default:
       return state;
