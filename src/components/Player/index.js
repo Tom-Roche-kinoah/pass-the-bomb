@@ -30,7 +30,7 @@ function Player({ playerName }) {
         type="button"
         onClick={() => handleRemovePlayer(playerName)}
       >
-        ✖
+        ×
       </button>
     </motion.li>
   );

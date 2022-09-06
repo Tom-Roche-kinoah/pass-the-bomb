@@ -81,7 +81,7 @@ function Bomb() {
         type="button"
         onClick={() => handleStopGame()}
       >
-        ✖
+        ×
       </button>
       <p>Manche {currentRound} sur {rounds}</p>
       <img className="game-logo" src={bombLogo} alt="Game Logo" />

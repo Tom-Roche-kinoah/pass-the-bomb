@@ -61,8 +61,8 @@ function App() {
   };
 
   const handleSoundPlay = (sound) => {
-    sound.play();
     sound.currentTime = 0.0;
+    sound.play();
   };
 
   const scores = useSelector((state) => (state.game.scores));
