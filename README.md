@@ -5,5 +5,5 @@ Mobile local multiplayer game
 Try it here : https://kinoah.com/tic-tac-boom/
 
 ### Know issues
-Explosion sound not playing on ios...
-(only sounds triggered by a user action are allowed on ios browsers)
+- Explosion sound not playing on ios... (only sounds triggered by a user action are allowed on ios browsers)
+- The victory screen doesnt handle ties
